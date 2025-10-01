@@ -1,0 +1,97 @@
+1.import libraries
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+2.Load the CSV File
+# Replace 'sales_data.csv' with your actual file name
+df = pd.read_csv('sales_data.csv')
+# Preview the dataset
+df.head()
+
+3.Basic Data Exploration
+df.info()        # Get data types and missing values
+df.describe()    # Summary statistics
+df.columns       # List all column names
+
+4.. Example Columns (Common Sales Dataset Format)
+
+Typical CSV columns might include:
+
+Date
+
+Product
+
+Category
+
+Region
+
+Sales
+
+Quantity
+
+Revenue
+
+5.Basic Analysis Using Pandas
+a. Total Sales by Product
+sales_by_product = df.groupby('Product')['Sales'].sum().sort_values(ascending=False)
+print(sales_by_product)
+
+b. Total Sales by Region
+sales_by_region = df.groupby('Region')['Sales'].sum()
+print(sales_by_region)
+
+c. Monthly Sales Trend
+
+If the dataset has a Date column:
+
+df['Date'] = pd.to_datetime(df['Date'])
+df['Month'] = df['Date'].dt.to_period('M')
+
+monthly_sales = df.groupby('Month')['Sales'].sum()
+print(monthly_sales)
+
+6. Plot Charts
+a. Bar Chart – Sales by Product
+sales_by_product.plot(kind='bar', figsize=(8,5), color='skyblue')
+plt.title('Total Sales by Product')
+plt.ylabel('Sales')
+plt.show()
+
+b. Pie Chart – Sales by Region
+sales_by_region.plot(kind='pie', autopct='%1.1f%%', figsize=(6,6))
+plt.title('Sales Distribution by Region')
+plt.ylabel('')
+plt.show()
+
+c. Line Chart – Monthly Sales Trend
+monthly_sales.plot(kind='line', marker='o', figsize=(8,5))
+plt.title('Monthly Sales Trend')
+plt.xlabel('Month')
+plt.ylabel('Total Sales')
+plt.show()
+
+7. Insights / Observations
+
+You can write a short summary, for example:
+
+Product A has the highest total sales.
+
+Region North contributes 40% of total sales.
+
+Sales peak during December, indicating a seasonal pattern.
+
+example code:
+# Create a sample CSV file for testing
+sample_data = {
+    'Date': pd.date_range(start='2023-01-01', periods=12, freq='M').tolist() * 3,
+    'Product': ['Laptop', 'Tablet', 'Phone'] * 12,
+    'Region': ['North', 'South', 'East'] * 12,
+    'Sales': [25000, 18000, 30000, 28000, 19000, 27000, 22000, 21000, 26000, 24000, 20000, 31000] * 3
+}
+
+sample_df = pd.DataFrame(sample_data)
+sample_df.to_csv('sales_data.csv', index=False)
+
+print("✅ Sample sales_data.csv file created successfully!")
+sample_df.head()
