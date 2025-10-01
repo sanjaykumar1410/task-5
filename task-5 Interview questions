@@ -1,0 +1,106 @@
+1. What is Pandas used for?
+
+ Answer:
+Pandas is a Python library used for data analysis and data manipulation.
+It provides powerful tools to handle structured data like tables (rows & columns).
+With Pandas, you can easily load, clean, filter, analyze, and visualize data.
+
+2. What’s a DataFrame?
+
+ Answer:
+A DataFrame is a 2-dimensional labeled data structure in Pandas, like an Excel sheet.
+It consists of rows and columns and can hold different data types (int, float, string, etc).
+
+Example:
+
+import pandas as pd
+data = {'Name': ['Alice', 'Bob'], 'Age': [25, 30]}
+df = pd.DataFrame(data)
+
+3. How do you read a CSV file?
+
+ Answer:
+Use the pd.read_csv() function.
+Example:
+
+df = pd.read_csv('sales_data.csv')
+
+
+This loads the CSV file into a Pandas DataFrame.
+
+4. What is groupby()?
+
+ Answer:
+groupby() is used to group data based on one or more columns, and then apply functions like sum(), mean(), count(), etc.
+
+Example:
+
+df.groupby('Region')['Sales'].sum()
+
+
+→ This gives total sales for each region.
+
+5. How do you filter rows?
+
+ Answer:
+You can filter rows using conditions inside brackets [].
+
+Example:
+
+# Get rows where Sales > 20000
+high_sales = df[df['Sales'] > 20000]
+
+6. Difference between loc[] and iloc[]?
+
+ Answer:
+
+Method	Used For	Example	Description
+loc[]	Label-based indexing	df.loc[2, 'Sales']	Access using row/column labels
+iloc[]	Integer-based indexing	df.iloc[2, 1]	Access using row/column positions
+7. What does .head() do?
+
+ Answer:
+.head() displays the first 5 rows of the DataFrame (default).
+Example:
+
+df.head()
+
+
+You can also specify how many rows:
+
+df.head(10)
+
+8. How can you create a bar chart?
+
+ Answer:
+You can create a bar chart using plot(kind='bar').
+
+Example:
+
+df.groupby('Product')['Sales'].sum().plot(kind='bar')
+
+
+Or with matplotlib:
+
+plt.bar(df['Product'], df['Sales'])
+plt.show()
+
+9. What’s the shape of a DataFrame?
+
+ Answer:
+df.shape returns the (rows, columns) of the DataFrame.
+
+Example:
+
+df.shape
+# Output example: (100, 5) → 100 rows, 5 columns
+
+10. What is NaN?
+
+Answer:
+NaN stands for “Not a Number” — it represents missing or null data in Pandas.
+You can find or remove NaN values using:
+
+df.isnull()      # check missing
+df.dropna()      # remove missing
+df.fillna(0)     # replace with 0
